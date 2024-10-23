@@ -4,7 +4,7 @@ Taste Match
 
 ## Overview
 
-TasteMatch is an app that helps you to explore different recipes based on eating style, nutrition requirement and ingredient available at home. With the help of filters such as cuisine type, meal type, dish type allergies, diet calories and nutrition, users can receive recipe recommendations according to their choices.
+TasteMatch is an app that helps you to explore different recipes based on eating style, nutrition requirement and ingredient available at home. With the help of filters such as cuisine type, meal type, dish type, allergies, and diets users can receive recipe recommendations according to their choices.
 
 ### Problem Space
 
@@ -25,7 +25,6 @@ App ensures that users can easily navigate filters without feeling tedious and o
 - Ingredient-based search: Enabled user to enter ingredients they have on hand, app will return results of recipes that included those items.
 - Cuisine, meal, and dish type filters: Users can refine their search based on cuisine, meal type, or dish type.
 - Allergies and Diet filters: Users can enter allergies to avoid some ingredients.
-- Calories and Nutritional filters: Users can set calorie or nutrient preferences to match their dietary goals.
 - Recipe detail view: Displays ingredients, cooking instructions, nutrition information.
 
 ## Implementation
@@ -53,12 +52,11 @@ App ensures that users can easily navigate filters without feeling tedious and o
 ### Sitemap
 
 - Home Page with Search Results functionality:
-  - Hero image with search button that will direct to section below.
   - Search bar to enter ingredients.
-  - Sorting options by filters (cuisine type, meal type, dish type, allergies, diets, calories, nutrients).
+  - Sorting options by filters (cuisine type, meal type, dish type, allergies, diets).
   - List of filtered recipes with images, number of ingredients and calorie count.
 - Recipe Detail Page:
-  - Full recipe, ingredients, cooking instructions, and nutrition information.
+  - Ingredients, cooking instructions, and nutrition information.
 
 ### Mockups
 
@@ -94,8 +92,7 @@ Parameters:
 - cuisineType: type of cuisine of the recipe
 - mealType: type of meal a recipe belongs to
 - dishType: the dish type a recipe belongs to
-- calories: to filter by calories
-- nutrients: to filter by nutrients
+
 
 **GET api/recipes/v2/:id**
 
@@ -199,7 +196,7 @@ Core Frontend Functionality:
 - Home Page & Ingredient Search: Create the Home Page with the search bar. Fetch internal API routes to get the dummy data.
 - Replace the dummy data within Express server with real API calls to Edamam API.
 - On the frontend ensure that the data coming from the Express server is being processed as expected.
-- Filters: Add filter options for cuisine type, meal type, dish type, allergies, diet preferences, calories, nutrients. Confirm that these filters are functional.
+- Filters: Add filter options for cuisine type, meal type, dish type, allergies, diet preferences. Confirm that these filters are functional.
 - Recipe Detail Page: On the frontend develop a recipe detail page where users can view the recipe ingredients, instructions, nutrition facts and connected to the Express server. On the Backend update the Express routes to handle calls for a single recipe to the Edamam API.
 
 Testing:
