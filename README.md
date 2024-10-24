@@ -4,15 +4,15 @@ Taste Match
 
 ## Overview
 
-TasteMatch is an app that helps you to explore different recipes based on eating style, nutrition requirement and ingredient available at home. With the help of filters such as cuisine type, meal type, dish type, allergies, and diets users can receive recipe recommendations according to their choices.
+Taste Match is an app that helps explore a variety of recipes tailored to different eating preferences and available ingredients. With the help of filters such as cuisine type, meal type, dish type, allergies, and diets users can receive recipe recommendations according to their choices.
 
 ### Problem Space
 
-It can be challenging to meet certain diet parameters or health standards when trying to create the right recipe. This is solved by TasteMatch that allows to input the ingredients and preferences you have to obtain recommended recipes. This is time-conscious and helps consume whatever ingredient users already have.
+It can be challenging to meet certain diet parameters or health standards when trying to create the right recipe. This is solved by Taste Match that allows to input the ingredients and preferences you have to obtain recommended recipes. This is time-conscious and helps consume whatever ingredient users already have.
 
 ### User Profile
 
-The main users of TasteMatch are:
+The main users of Taste Match are:
 
 - Health-oriented users: People with specific dietary goals searching for recipes that match their health goals.
 - Users with dietary restrictions: Users with allergies or intolerances needing safe recipe selections
