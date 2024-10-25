@@ -8,9 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors());
-// double check below
 app.use(express.json());
-
 app.use(express.static("public"));
 
 app.use("/recipes", recipesRoutes);

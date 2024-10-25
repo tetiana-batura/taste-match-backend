@@ -10,8 +10,9 @@ const EXTERNAL_API = process.env.EXTERNAL_API;
 const APP_ID = process.env.APP_ID;
 const APP_KEY = process.env.APP_KEY;
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   // add condition when params are empty
+  console.log(req.body)
   try {
     const recipesResponse = await axios.get(`${EXTERNAL_API}?type=public&app_id=${APP_ID}&app_key=${APP_KEY}`);
     const recipesData = recipesResponse.data;
@@ -21,7 +22,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.post("/:id", async (req, res) => {
   try {
     const recipeId = req.params.id;
     const recipeResponse = await axios.get(`${EXTERNAL_API}/${recipeId}?type=public&app_id=${APP_ID}&app_key=${APP_KEY}`);
