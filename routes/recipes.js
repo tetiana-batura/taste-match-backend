@@ -10,6 +10,16 @@ const EXTERNAL_API = process.env.EXTERNAL_API;
 const APP_ID = process.env.APP_ID;
 const APP_KEY = process.env.APP_KEY;
 
+router.get("/", async (req, res) => {
+  try {
+    const recipesResponse = await axios.get(`${EXTERNAL_API}?q=chicken&type=public&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    const recipesData = recipesResponse.data;
+    return res.status(200).json(recipesData);
+  } catch (err) {
+    // write am error handler
+  }
+});
+
 router.post("/", async (req, res) => {
   // add condition when params are empty
   console.log(req.body)
