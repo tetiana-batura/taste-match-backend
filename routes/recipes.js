@@ -12,7 +12,9 @@ const APP_KEY = process.env.APP_KEY;
 
 router.get("/", async (req, res) => {
   try {
-    const recipesResponse = await axios.get(`${EXTERNAL_API}?q=chicken&type=public&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    const recipesResponse = await axios.get(
+      `${EXTERNAL_API}?q=avocado&type=public&app_id=${APP_ID}&app_key=${APP_KEY}`
+    );
     const recipesData = recipesResponse.data;
     return res.status(200).json(recipesData);
   } catch (err) {
@@ -22,9 +24,26 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   // add condition when params are empty
-  console.log(req.body)
+  function convertJSON(json) {
+    let queryParams = [];
+
+    for (let key in json) {
+      json[key].forEach((value) => {
+        queryParams.push(
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        );
+      });
+    }
+
+    return "?" + queryParams.join("&");
+  }
+
+  const queryString = convertJSON(req.body);
+
   try {
-    const recipesResponse = await axios.get(`${EXTERNAL_API}?type=public&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    const recipesResponse = await axios.get(
+      `${EXTERNAL_API}${queryString}&type=public&app_id=${APP_ID}&app_key=${APP_KEY}`
+    );
     const recipesData = recipesResponse.data;
     return res.status(200).json(recipesData);
   } catch (err) {
@@ -35,7 +54,9 @@ router.post("/", async (req, res) => {
 router.post("/:id", async (req, res) => {
   try {
     const recipeId = req.params.id;
-    const recipeResponse = await axios.get(`${EXTERNAL_API}/${recipeId}?type=public&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    const recipeResponse = await axios.get(
+      `${EXTERNAL_API}/${recipeId}?type=public&app_id=${APP_ID}&app_key=${APP_KEY}`
+    );
     const recipeData = recipeResponse.data;
 
     if (!recipeData) {
