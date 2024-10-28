@@ -10,6 +10,13 @@ const EXTERNAL_API = process.env.EXTERNAL_API;
 const APP_ID = process.env.APP_ID;
 const APP_KEY = process.env.APP_KEY;
 
+const errorHandler = (err, req, res, next) => {
+  console.error("Error:", err.message);
+  res
+    .status(500)
+    .json({ message: "Internal server error", error: err.message });
+};
+
 router.get("/", async (req, res) => {
   try {
     const recipesResponse = await axios.get(
@@ -18,12 +25,18 @@ router.get("/", async (req, res) => {
     const recipesData = recipesResponse.data;
     return res.status(200).json(recipesData);
   } catch (err) {
-    // write am error handler
+    console.error("Failed to fetch recipes:", err.message);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch recipes", error: err.message });
   }
 });
 
 router.post("/", async (req, res) => {
-  // add condition when params are empty
+  if (!req.body.q || req.body.q.length === 0) {
+    return res.status(400).json({ message: "Query parameter 'q' is required" });
+  }
+
   function convertJSON(json) {
     let queryParams = [];
 
@@ -45,13 +58,22 @@ router.post("/", async (req, res) => {
       `${EXTERNAL_API}${queryString}&type=public&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const recipesData = recipesResponse.data;
+    if (recipesData.count === 0) {
+      return res.status(400).json({
+        message:
+          "Error fetching search results. Please, try with another selection.",
+      });
+    }
     return res.status(200).json(recipesData);
   } catch (err) {
-    // write am error handler
+    console.error("Failed to search recipes:", err.message);
+    res
+      .status(500)
+      .json({ message: "Failed to search recipes", error: err.message });
   }
 });
 
-router.post("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const recipeId = req.params.id;
     const recipeResponse = await axios.get(
@@ -64,8 +86,13 @@ router.post("/:id", async (req, res) => {
     }
     return res.status(200).json(recipeData);
   } catch (err) {
-    // write am error handler
+    console.error("Failed to fetch recipe by ID:", err.message);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch recipe", error: err.message });
   }
 });
+
+router.use(errorHandler);
 
 export default router;
